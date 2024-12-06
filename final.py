@@ -168,8 +168,8 @@ print(f"intercept (b) is : {intercept}")
 print(f"R squared is : {r**2}")
 
 
-plt.scatter(df['x'],df['y'], color='#b16286', marker='^')
-plt.plot(df['x'],yRegress, color='#d79921', ls='--')
+plt.scatter(df['x'],df['y'], color='#b16286', marker='^') #color and marker are cosmetic
+plt.plot(df['x'],yRegress, color='#d79921', ls='--') #ls -> linestyle, cosmetic
 plt.show()
 """
 
@@ -199,7 +199,7 @@ slope, intercept, r, p, se = linregress(xValues,yValues)
 yRegress = (xValues*slope)+intercept
 rSquared = f"R² = {r**2:.4f}" #f string is used to make it a label on graph
 
-plt.plot(xValues,yValues, color='#cc241d', label='EQ : (0.9x^2)-4x+5')
+plt.plot(xValues,yValues, color='#cc241d', label='EQ : 0.9x²-4x+5')
 plt.plot(xValues,yRegress, color='#fb4934', ls='--', label=rSquared)
 plt.scatter(xMin,yMin, color='#fabd2f')
 
@@ -252,6 +252,7 @@ plt.show()
 #~~~# EXAMPLE 5 #~~~#
 
 
+
 #---------///---------///---------///---------
 #~~~# EXAMPLE 6 #~~~#
 
@@ -287,7 +288,79 @@ plt.show()
 """
 
 #---------///---------///---------///---------
-#~~~# EXAMPLE 6 #~~~#
+#~~~# EXAMPLE 7 #~~~#
+
+"""
+ #values
+df = pd.read_excel('fluid_flow_data.xlsx')
+q = df.iloc[:,0].values
+deltaP = df.iloc[:,1].values
+
+ #logs to work with EQ
+ln_q = np.log(q)
+ln_deltaP = np.log(deltaP)
+
+ #linear regression
+slope, intercept, r, idk, se = linregress(ln_q,ln_deltaP)
+
+k = np.exp(intercept)
+
+ #fitted curve values
+ln_dP_fit = (slope*ln_q)+intercept
+deltaP_fit = np.exp(ln_dP_fit)
+
+ #begin plotting
+plt.scatter(q,deltaP, color='#d79921', label='Experimental Data')
+plt.plot(q, deltaP_fit, color='#fb4934', ls=':', label="Adjusted Model")
+
+plt.text(0.25,150, f"k = {k:.2f}") #not learned in class, alternative to printing k in console
+plt.title('Adjustement of Darcy-Weisbach Equation')
+plt.xlabel('Q, m³/s')
+plt.ylabel('ΔP, Pa')
+plt.legend()
+plt.show()
+"""
+
+#---------///---------///---------///---------
+#~~~# EXAMPLE 8 #~~~#
+
+"""
+ #Equation
+def f(params):
+    a = params[0]
+    b = params[1]
+    v1 = [a-2,b+3,-1,1]
+    v2 = [a-2,b+3,1,1]
+    scalar = np.dot(v1,v2)
+    return scalar**2
+
+ #optimal parameters
+result = minimize(f,[0.0,0.0])
+aOptimal = round(result.x[0], 2)
+bOptimal = round(result.x[1], 2)
+minValue = round(result.fun, 2)
+
+ #send to text file
+with open('exemple8.txt', 'w') as f:
+    f.write(f"alpha = {aOptimal}\n")
+    f.write(f"beta = {bOptimal}\n")
+    f.write(f"function minimum = {minValue}")
+"""
+
+#---------///---------///---------///---------
+#~~~# EXAMPLE 9 #~~~#
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
