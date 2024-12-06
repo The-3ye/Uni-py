@@ -20,6 +20,8 @@ from scipy.stats import linregress
 #---------///---------///---------///---------
 #~~~# EXAMPLE 1 #~~~#
 
+#inneficient way to do it, online solution is better
+
 """
 #optimisation
 
@@ -317,8 +319,7 @@ plt.text(0.25,150, f"k = {k:.2f}") #not learned in class, alternative to printin
 plt.title('Adjustement of Darcy-Weisbach Equation')
 plt.xlabel('Q, m³/s')
 plt.ylabel('ΔP, Pa')
-plt.legend()
-plt.show()
+plt.legend() plt.show()
 """
 
 #---------///---------///---------///---------
@@ -336,9 +337,13 @@ def f(params):
 
  #optimal parameters
 result = minimize(f,[0.0,0.0])
-aOptimal = round(result.x[0], 2)
-bOptimal = round(result.x[1], 2)
-minValue = round(result.fun, 2)
+aOpt = result.x[0]
+bOpt = result.x[1]
+minVal = result.fun
+
+aOptimal = round(aOpt, 2)
+bOptimal = round(bOpt, 2)
+minValue = round(minVal, 2)
 
  #send to text file
 with open('exemple8.txt', 'w') as f:
@@ -350,15 +355,130 @@ with open('exemple8.txt', 'w') as f:
 #---------///---------///---------///---------
 #~~~# EXAMPLE 9 #~~~#
 
+"""
+ # Equation
+def f(parameters):
+    a = parameters[0]
+    b = parameters[1]
+    v1 = [a+2, b-5, -3, 3]
+    v2 = [a+2, b-5, 1, 1]
+    return (np.dot(v1,v2))**2
+
+ #optimal  parameters
+result = minimize(f,[0,0])
+aOptimal = round(result.x[0], 2)
+bOptimal = round(result.x[1], 2)
+minValue = round(result.fun, 2)
+
+ #shows results, to send to text file, see EXAMPLE 8
+print(f"Optimal a value is : {aOptimal}")
+print(f"Optimal b value is : {bOptimal}")
+print(f"Minimal function value is : {minValue}")
+"""
+
+#---------///---------///---------///---------
+#~~~# EXAMPLE 10 #~~~#
+
+"""
+ #Equation
+def f(parameters):
+    a = parameters[0]
+    b = parameters[1]
+    v1 = [a+2, b+5, 10, 1]
+    v2 = [a-2, b+3, 1, 1]
+    return (np.dot(v1,v2)**2)
+
+ #optimal  parameters
+result = minimize(f,[0,0])
+aOptimal = round(result.x[0], 2)
+bOptimal = round(result.x[1], 2)
+minValue = round(result.fun, 2)
+
+ #shows results, to send to text file, see EXAMPLE 8
+print(f"Optimal a value is : {aOptimal}")
+print(f"Optimal b value is : {bOptimal}")
+print(f"Minimal function value is : {minValue}")
+"""
+
+#---------///---------///---------///---------
+#~~~# EXAMPLE 11 #~~~#
+
+"""
+ #Equation
+def f(parameters):
+    a = parameters[0]
+    b = parameters[1]
+    return ((a**2)+(b**2)+(4*b)+10)**2
+
+ #optimal parameters
+result = minimize(f,[0,0])
+aOptimal = round(result.x[0], 2)
+bOptimal = round(result.x[1], 2)
+minValue = round(result.fun, 2)
+
+ #shows results, to send to text file, see EXAMPLE 8
+print(f"Optimal a value is : {aOptimal}")
+print(f"Optimal b value is : {bOptimal}")
+print(f"Minimal function value is : {minValue}")
+
+print("-----~~~~~~~-----")
+
+#does not give different values when changing initial guess as expected
+
+ #TESTEZ-VOUS Equation
+def g(parameters):
+    a = parameters[0]
+    b = parameters[1]
+    return ((a**2)-(b**2)+(4*b)+10)**2
+
+ #optimal parameters
+result2 = minimize(f,[0.5,-10])
+aOptimal2 = round(result2.x[0], 2)
+bOptimal2 = round(result2.x[1], 2)
+minValue2 = round(result2.fun, 2)
+
+ #shows results, to send to text file, see EXAMPLE 8
+print(f"Optimal a value is : {aOptimal2}")
+print(f"Optimal b value is : {bOptimal2}")
+print(f"Minimal function value is : {minValue2}")
+"""
+
+#---------///---------///---------///---------
+#~~~# EXAMPLE 12 #~~~#
 
 
+#---------///---------///---------///---------
+#~~~# EXAMPLE 13 #~~~#
 
 
+#---------///---------///---------///---------
+#~~~# EXAMPLE 14 #~~~#
 
+"""
+#NOT DONE
 
+ #DataFrame creation
+scoresDF = pd.read_excel('student_scores.xlsx')
 
+ #group mean for every subject
+mathMean = np.mean(scoresDF['math_score'])
+physMean = np.mean(scoresDF['physics_score'])
+chemMean = np.mean(scoresDF['chemistry_score'])
+generalMean = np.mean(scoresDF['total_score'])
 
+bestStudentValue = np.max(scoresDF['total_score'])
 
+ #show results
+print(f"Class mean score for Math is : {mathMean}/20")
+print(f"Class mean score for Physics is : {physMean}/20")
+print(f"Class mean score for Chemistry is : {chemMean}/20")
+print(f"Class mean total score is : {generalMean}/60")
+print("-----~~~~~~~-----")
+print(f"Best student score is : {bestStudentValue}/60")
+"""
+
+#---------///---------///---------///---------
+#~~~# EXAMPLE 15 #~~~#
 
 
 
