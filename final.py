@@ -2,6 +2,7 @@
 
 2024 dec 03 
 final // intro prog ingenieurs UdeS
+                  
 
 Pratique a l'examen final                                 
 
@@ -254,6 +255,7 @@ plt.show()
 #---------///---------///---------///---------
 #~~~# EXAMPLE 6 #~~~#
 
+"""
  #data
 df = pd.read_excel('bacterial_growth_data.xlsx')
 t = df['time (h)'].values
@@ -262,16 +264,17 @@ logN = df['log(N)'].values
  #linear regreassion
 slope, intercept, r, p, se = linregress(t,logN)
 
- # adjusted parameters 
-n0_fitted = np.exp(intercept)
-
 xTime = np.linspace(0, 10, 100)
 yLogRegress = (slope * xTime) + intercept
+
+ # adjusted parameters 
+n0_fitted = np.exp(intercept)
 n = np.exp(yLogRegress)
 
 print(f"Inital Amount of Bacteria : {n0_fitted:.4f}")
 print(f"Growth Rate : {slope:.4f}")
 print(f"R² : {r**2:.4f}")
+
  #plotting
 plt.scatter(t,np.exp(logN), color='#dfaf87', label='Experimental Data')
 plt.plot(xTime,n, color='#83a598', ls=':', label='Adjusted Model')
@@ -281,7 +284,10 @@ plt.xlabel('Time (h)')
 plt.ylabel('Amount of bacteria (n)')
 plt.legend()
 plt.show()
+"""
 
+#---------///---------///---------///---------
+#~~~# EXAMPLE 6 #~~~#
 
 
 
