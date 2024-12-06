@@ -2,7 +2,6 @@
 
 2024 dec 03 
 final // intro prog ingenieurs UdeS
-Raphaelle Fortin
 
 Pratique a l'examen final                                 
 
