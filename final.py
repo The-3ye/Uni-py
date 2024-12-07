@@ -95,6 +95,7 @@ print(f"function 6 maximum is at {x6} with value {max6}")
 #graph code
 
  #plot functions
+ #innefficient part, could be merged with above functions
 def f1(x):
     return (x**2)-(4*x)+5
 
@@ -424,6 +425,7 @@ print(f"Minimal function value is : {minValue}")
 print("-----~~~~~~~-----")
 
 #does not give different values when changing initial guess as expected
+#>
 
  #TESTEZ-VOUS Equation
 def g(parameters):
@@ -432,7 +434,7 @@ def g(parameters):
     return ((a**2)-(b**2)+(4*b)+10)**2
 
  #optimal parameters
-result2 = minimize(f,[0.5,-10])
+result2 = minimize(f,[0.5,-10]) #<~~!~~ changed parameters have no effect
 aOptimal2 = round(result2.x[0], 2)
 bOptimal2 = round(result2.x[1], 2)
 minValue2 = round(result2.fun, 2)
@@ -441,40 +443,55 @@ minValue2 = round(result2.fun, 2)
 print(f"Optimal a value is : {aOptimal2}")
 print(f"Optimal b value is : {bOptimal2}")
 print(f"Minimal function value is : {minValue2}")
+#>
+#>
+
+
 """
 
 #---------///---------///---------///---------
 #~~~# EXAMPLE 12 #~~~#
-
+ #VBA bruh
 
 #---------///---------///---------///---------
 #~~~# EXAMPLE 13 #~~~#
-
+ #VBA bruh
 
 #---------///---------///---------///---------
 #~~~# EXAMPLE 14 #~~~#
 
-"""
-#NOT DONE
 
+"""
  #DataFrame creation
 scoresDF = pd.read_excel('student_scores.xlsx')
 
- #group mean for every subject
-mathMean = np.mean(scoresDF['math_score'])
-physMean = np.mean(scoresDF['physics_score'])
-chemMean = np.mean(scoresDF['chemistry_score'])
-generalMean = np.mean(scoresDF['total_score'])
 
-bestStudentValue = np.max(scoresDF['total_score'])
+ #group mean for every subject
+ # subject -> DataFame column 
+mathMean = np.mean( scoresDF['math_score'])
+physMean = np.mean( scoresDF['physics_score'])
+chemMean = np.mean( scoresDF['chemistry_score'])
+generalMean = np.mean( scoresDF['total_score'])
+
+bestStudentValue = np.max(scoresDF['total_score'])  #score of best student
+
+bestStudentEntry = scoresDF['total_score'].idxmax() #finds ID (row) of max val for condition
+
+bestStudentRow = scoresDF.loc[bestStudentEntry] #.loc selects row based on condition ^^
+bestStudentID = bestStudentRow['student_id']    # we want seleccted row in column of choice, here 'st_id'
+
+ #better than some number (here 15 / 60)
+percentAbove15 = (scoresDF['total_score'] >= 15).mean() * 100 #yes, here 100% of the class got above 15
 
  #show results
 print(f"Class mean score for Math is : {mathMean}/20")
 print(f"Class mean score for Physics is : {physMean}/20")
 print(f"Class mean score for Chemistry is : {chemMean}/20")
-print(f"Class mean total score is : {generalMean}/60")
-print("-----~~~~~~~-----")
-print(f"Best student score is : {bestStudentValue}/60")
+print(f"\nClass mean total score is : {generalMean}/60")
+print(f"{percentAbove15} % of the class got higher than 15\n")
+print("-----~~~~~~~-----\n")
+print(f"Best student is : {bestStudentID} with score : {bestStudentValue}/60")
+
 """
 
 #---------///---------///---------///---------
