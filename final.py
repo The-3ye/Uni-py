@@ -17,6 +17,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from scipy.stats import linregress 
 
+from scipy.signal import argrelmin 
+
 #---------///---------///---------///---------
 #~~~# EXAMPLE 1 #~~~#
 
@@ -254,7 +256,33 @@ plt.show()
 #---------///---------///---------///---------
 #~~~# EXAMPLE 5 #~~~#
 
+    
+"""
+def  f(x):
+    return (2*np.cos(x))-((x**2)/5)
 
+
+xMinVal = -5
+xMaxVal = 5
+xAmount = (xMaxVal-xMinVal)/ 0.1
+
+xValues = np.linspace(xMinVal,xMaxVal, int(xAmount))
+yValues = f(xValues)
+
+
+max = minimize(f,[0.0])
+maximumX = max.x[0]
+maximumY = max.fun
+
+minimumID = argrelmin(yValues) #function not showed in class, finds array location of minima
+minimumsY = yValues[minimumID]
+minimumsX = xValues[minimumID]
+
+plt.plot(xValues,yValues, color='#8ec07c')
+plt.scatter(maximumX,maximumY, color='#fe8019')
+plt.scatter(minimumsX,minimumsY, color='#fe8019')
+plt.show()
+"""
 
 #---------///---------///---------///---------
 #~~~# EXAMPLE 6 #~~~#
@@ -497,8 +525,22 @@ print(f"Best student is : {bestStudentID} with score : {bestStudentValue}/60")
 #---------///---------///---------///---------
 #~~~# EXAMPLE 15 #~~~#
 
+"""
+salesDF = pd.read_excel('sales_data.xlsx')
 
+ #calculations
+totalRevenue = np.sum(salesDF['amount'])
+meanPerSale = np.mean(salesDF['amount'])
 
+favouritePayMethod = salesDF['payment_method'].mode()  #mode finds the most common element of list
+favouritePayMethod = favouritePayMethod[0]             # ^^ returns weird DF, we want only the string
 
+totalPerCategory = salesDF.groupby('product_category') ['amount'].sum()  #groups rows of selected column,,
 
-
+ #results printing
+print(f"Total Sales Revenue : {totalRevenue:.2f} $")
+print(f"Mean Revenue per Transaction : {meanPerSale:.2f} $")
+print(f"\nTotal per Product Category : ")
+print(f"{totalPerCategory}\n")
+print(f"Most Used Payment Method : {favouritePayMethod}")
+"""
