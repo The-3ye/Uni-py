@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from scipy.stats import linregress 
 
-from scipy.signal import argrelmin 
+from scipy.signal import argrelmin, argrelmax 
 
 #---------///---------///---------///---------
 #~~~# EXAMPLE 1 #~~~#
@@ -89,10 +89,8 @@ x5 = result5.x[0]
 min5 = result5.fun
 print(f"function 5 minimum is at {x5} with value {min5}")
 
-result6 = minimize(funct6,init0)
-x6 = result6.x[0]
-max6 = result6.fun
-print(f"function 6 maximum is at {x6} with value {max6}")
+#moved number 6 because uses later variables
+
 
 #graph code
 
@@ -125,7 +123,14 @@ y2Values = f2(xValues)
 y3Values = f3(xValues)
 y4Values = f4(xValues)
 y5Values = f5(xValues)
-y6Values = f6(xValues)
+y6Values = f6(x6Values)
+
+ #local max of 6
+max6ID = argrelmax(y6Values)
+x6 = x6Values[max6ID]
+max6 = y6Values[max6ID]
+print(f"function 6 maximum is at {x6} with value {max6}")
+
 
  #start plotting
 fig, ax = plt.subplots(2, 3) #2 lines, 3 columns
